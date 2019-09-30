@@ -1,4 +1,7 @@
 pipeline {
+    environment {
+        USER_CREDENTIALS = credentials('dockerhub')
+    }
     agent any
     stages {
         stage('Lint HTML') {
@@ -13,7 +16,7 @@ pipeline {
         }
         stage('Push to Docker Hub') {
             steps {
-                sh './upload_docker.sh'
+                sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
     }
