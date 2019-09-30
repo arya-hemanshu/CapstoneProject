@@ -10,7 +10,6 @@ dockerpath=aryahemanshu/capstone
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
-echo "$1 $2"
 docker login --username $1 --password $2 
 docker tag capstone $dockerpath:1
 

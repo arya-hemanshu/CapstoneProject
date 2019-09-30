@@ -16,7 +16,6 @@ pipeline {
         }
         stage('Push to Docker Hub') {
             steps {
-                sh 'echo $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
