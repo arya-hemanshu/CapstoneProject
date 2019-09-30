@@ -46,8 +46,15 @@ Resources:
             #!/bin/bash
             apt-get update -y
             apt-get install -y git
-            apt-get install -y virtualbox
-            apt-get install -y minikube
+            apt-get install -y curl
+            apt-get install -y virtualbox virtualbox-ext-pack
+            curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+            touch /etc/apt/sources.list.d/kubernetes.list
+            echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+            apt-get update
+            apt-get install -y kubectl
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-linux-amd64
+            chmod +x minikube && mv minikube /usr/local/bin/
             minikube start
             git clone https://github.com/arya-hemanshu/CapstoneProject.git
             cd CapstoneProject/
