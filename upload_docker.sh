@@ -5,13 +5,13 @@
 
 # Step 1:
 # Create dockerpath
-dockerpath=aryahemanshu/udacitytask4
+dockerpath=aryahemanshu/capstone
 
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 docker login
-docker tag udacitytask4 $dockerpath:1
+docker tag capstone $dockerpath:1
 
 # Step 3:
 # Push image to a docker repository
