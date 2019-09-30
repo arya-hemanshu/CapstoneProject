@@ -11,5 +11,10 @@ pipeline {
                 sh './run_docker.sh'
             }
         }
+        stage('Push to Docker Hub') {
+            steps {
+                sh './upload_docker.sh'
+            }
+        }
     }
 }
