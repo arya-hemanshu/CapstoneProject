@@ -44,25 +44,22 @@ Resources:
         UserData:
           Fn::Base64: !Sub |
             #!/bin/bash
-            apt-get update -y
-            apt-get install -y git
-            apt-get install -y curl
-            apt-get install -y virtualbox virtualbox-ext-pack
-            curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-            touch /etc/apt/sources.list.d/kubernetes.list
-            echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-            apt-get update
-            apt-get install -y kubectl
-            curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-linux-amd64
-            chmod +x minikube && mv minikube /usr/local/bin/
-            minikube start
+            sudo apt-get -y update
+            sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            sudo chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+            sudo apt-get -y update && sudo apt-get install docker.io -y
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo chmod +x minikube && sudo mv minikube /usr/local/bin/
+            minikube version
+            minikube start --vm-driver=none
+            minikube status
             git clone https://github.com/arya-hemanshu/CapstoneProject.git
             cd CapstoneProject/
             ./run_kubernetes.sh
         ImageId: ami-06358f49b5839867c
         SecurityGroups:
         - Ref: WebServerSecGroup
-        InstanceType: t3.small
+        InstanceType: t3.medium
         BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:

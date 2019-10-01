@@ -19,5 +19,11 @@ pipeline {
                 sh './upload_docker.sh $USER_CREDENTIALS_USR $USER_CREDENTIALS_PSW'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh './create_infra.sh'
+            }
+        }
+
     }
 }
