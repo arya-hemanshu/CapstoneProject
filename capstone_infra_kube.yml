@@ -46,14 +46,23 @@ Resources:
             #!/bin/bash
             sudo apt-get -y update
             sudo apt-get -y install git
-            sudo apt-get -y install docker.io
-            sudo usermod -aG docker ubuntu
-            docker pull aryahemanshu/capstone
-            docker run -d -p 80:80 aryahemanshu/capstone
+            sudo apt-get -y install socat
+            sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            sudo chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+            sudo apt-get -y update && sudo apt-get install docker.io -y
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo chmod +x minikube && sudo mv minikube /usr/local/bin/
+            minikube version
+            sudo -i
+            minikube start --vm-driver=none
+            minikube status
+            git clone https://github.com/arya-hemanshu/CapstoneProject.git
+            cd CapstoneProject/
+            ./run_kubernetes.sh
         ImageId: ami-06358f49b5839867c
         SecurityGroups:
         - Ref: WebServerSecGroup
-        InstanceType: t3.micro
+        InstanceType: t3.medium
         BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:

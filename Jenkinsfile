@@ -24,6 +24,5 @@ pipeline {
                 sh './create_infra.sh'
             }
         }
-
     }
 }
