@@ -48,7 +48,8 @@ Resources:
             sudo apt-get -y install git
             sudo apt-get -y install docker.io
             sudo usermod -aG docker ubuntu
-            docker pull 
+            docker pull aryahemanshu/capstone
+            docker run -d -p 80:80 aryahemanshu/capstone
         ImageId: ami-06358f49b5839867c
         SecurityGroups:
         - Ref: WebServerSecGroup
