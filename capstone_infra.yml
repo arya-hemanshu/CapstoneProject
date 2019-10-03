@@ -51,5 +51,4 @@ Resources:
         MinSize: '1'
         MaxSize: '2'
         TargetGroupARNs:
-          Fn::ImportValue:
-              Fn::Sub: "${EnvironmentName}-WebAppTargetGroup"
+        - Fn::ImportValue: !Sub "${EnvironmentName}-WebAppTargetGroup"
